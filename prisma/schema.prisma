@@ -1,12 +1,105 @@
+// This is your Prisma schema file
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "mongodb"
-  url = DATABASE_URL
-
+  url      = env("DATABASE_URL")
 }
+
+// ============================================
+// USER & AUTHENTICATION MODELS
+// ============================================
+
+enum UserRole {
+  STUDENT
+  AUTHOR
+  ADMIN
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String   @unique
+  password  String
+  role      UserRole @default(STUDENT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  submissions       Submission[] @relation("StudentSubmissions")
+  assignedSubmissions Submission[] @relation("AuthorAssignments")
+  reviews           Review[]
+
+  @@map("users")
+}
+
+// ============================================
+// SUBMISSION MANAGEMENT MODELS
+// ============================================
+
+enum SubmissionStatus {
+  PENDING
+  UNDER_REVIEW
+  REVISION_REQUESTED
+  ACCEPTED
+  REJECTED
+}
+
+model Submission {
+  id          String           @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  abstract    String
+  fileUrl     String
+  status      SubmissionStatus @default(PENDING)
+  
+  studentId   String           @db.ObjectId
+  student     User             @relation("StudentSubmissions", fields: [studentId], references: [id], onDelete: Cascade)
+  
+  assignedAuthorId String?      @db.ObjectId
+  assignedAuthor   User?        @relation("AuthorAssignments", fields: [assignedAuthorId], references: [id])
+  
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  // Relations
+  reviews     Review[]
+
+  @@index([studentId])
+  @@index([assignedAuthorId])
+  @@index([status])
+  @@map("submissions")
+}
+
+enum ReviewRecommendation {
+  ACCEPT
+  REJECT
+  REVISE
+}
+
+model Review {
+  id             String               @id @default(auto()) @map("_id") @db.ObjectId
+  comments       String
+  recommendation ReviewRecommendation
+  
+  submissionId   String               @db.ObjectId
+  submission     Submission           @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  
+  authorId       String               @db.ObjectId
+  author         User                 @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  
+  createdAt      DateTime             @default(now())
+
+  @@index([submissionId])
+  @@index([authorId])
+  @@map("reviews")
+}
+
+// ============================================
+// AD TRACKING MODELS (existing)
+// ============================================
 
 model Ad {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
@@ -14,7 +107,7 @@ model Ad {
   description String?
   imageUrl    String
   targetUrl   String
-  placement   String   // e.g., "sidebar", "header", "article-top", "article-bottom"
+  placement   String
   isActive    Boolean  @default(true)
   startDate   DateTime @default(now())
   endDate     DateTime?
@@ -54,7 +147,7 @@ model AdView {
   userAgent    String?
   ipAddress    String?
   page         String
-  viewDuration Int?     // in milliseconds
+  viewDuration Int?
   viewedAt     DateTime @default(now())
 
   ad Ad @relation(fields: [adId], references: [id], onDelete: Cascade)
@@ -91,9 +184,9 @@ model AdDailyMetrics {
   views           Int      @default(0)
   clicks          Int      @default(0)
   uniqueVisitors  Int      @default(0)
-  ctr             Float    @default(0) // Click-through rate
-  viewability     Float    @default(0) // View rate
-  avgViewDuration Float    @default(0) // in seconds
+  ctr             Float    @default(0)
+  viewability     Float    @default(0)
+  avgViewDuration Float    @default(0)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
