@@ -283,7 +283,7 @@ export default function PublisherContactPage() {
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link
-                  href="mailto:editorjhssi@gmail.com"
+                  href="mailto:sgedlucknow@gmail.com"
                   className="px-10 py-4 bg-[#6B4A2E] text-white font-semibold rounded-full hover:bg-[#5A3D26] transition-colors shadow-lg text-lg"
                 >
                   Email Editorial Team

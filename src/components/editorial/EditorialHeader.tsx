@@ -39,7 +39,7 @@ export default function EditorialHeader() {
           </p>
           
           <Link
-            href="/submit"
+            href="/login"
             className="inline-block px-8 py-3 bg-[#6B4A2E] text-white font-medium rounded-full hover:bg-[#5A3D26] transition-colors shadow-lg hover:shadow-xl"
           >
             MAKE A SUBMISSION

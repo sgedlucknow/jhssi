@@ -285,7 +285,7 @@ export default function CommitmentSection() {
                 Join our community of scholars and contribute to global academic discourse.
               </p>
               <a
-                href="/submit"
+                href="/login"
                 className="inline-block px-8 py-3 bg-[#6B4A2E] text-white font-medium rounded-full hover:bg-[#5A3D26] transition-colors shadow-md hover:shadow-lg"
               >
                 Submit Manuscript

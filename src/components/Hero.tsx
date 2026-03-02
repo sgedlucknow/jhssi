@@ -45,13 +45,13 @@ export default function Hero() {
           {/* Two CTAs */}
           <div className="flex flex-wrap gap-6">
             <Link
-              href="/current-issue"
+              href="/current"
               className="bg-[#6B4A2E] text-white px-8 py-3.5 rounded-full font-semibold shadow-lg shadow-[#3F2A1D]/30 hover:bg-[#5A3D26] transition-all hover:shadow-xl hover:shadow-[#3F2A1D]/40 hover:scale-105"
             >
               View Current Issue
             </Link>
             <Link
-              href="/submit"
+              href="/login"
               className="border-2 border-[#6B4A2E] text-[#6B4A2E] px-8 py-3.5 rounded-full font-semibold hover:bg-[#F4EFE7]/10 transition-all hover:scale-105"
             >
               Submit Manuscript

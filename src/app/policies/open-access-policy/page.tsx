@@ -324,7 +324,7 @@ export default function OpenAccessPolicyPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
-                    href="/submit"
+                    href="/login"
                     className="px-8 py-3 bg-[#6B4A2E] text-white font-semibold rounded-full hover:bg-[#5A3D26] transition-colors shadow-lg"
                   >
                     Submit Your Manuscript

@@ -355,13 +355,13 @@ export default function AntiPlagiarismPolicyPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/submit"
+                href="/login"
                 className="px-8 py-3 bg-white text-[#3F2A1D] font-semibold rounded-full hover:bg-gray-100 transition-colors"
               >
                 Submit Manuscript
               </Link>
               <Link
-                href="/author-guidelines"
+                href="/authors"
                 className="px-8 py-3 border-2 border-white text-white font-semibold rounded-full hover:bg-white/10 transition-colors"
               >
                 View Author Guidelines

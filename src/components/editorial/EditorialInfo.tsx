@@ -187,13 +187,13 @@ export default function EditorialInfo() {
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link
-                  href="/join-editorial"
+                  href="/register"
                   className="px-6 py-3 bg-[#6B4A2E] text-white font-medium rounded-full hover:bg-[#5A3D26] transition-colors"
                 >
                   Apply to Join Editorial Board
                 </Link>
                 <Link
-                  href="/become-reviewer"
+                  href="/register"
                   className="px-6 py-3 border border-[#6B4A2E] text-[#6B4A2E] font-medium rounded-full hover:bg-[#F6F1E8] transition-colors"
                 >
                   Become a Reviewer

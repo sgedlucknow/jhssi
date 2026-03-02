@@ -527,7 +527,38 @@ export default function AuthorGuidelinesPage() {
             </div>
           </motion.div>
 
-          
+          {/* CTA Section */}
+          <motion.div 
+            className="mb-24"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ delay: 2.4, duration: 0.6 }}
+          >
+            <div className="bg-white p-12 rounded-xl shadow-lg border border-[#E6DDCF] text-center">
+              <h2 className="font-serif text-2xl text-[#3F2A1D] mb-8">
+                Ready to Submit?
+              </h2>
+              <p className="text-[#4A4036] text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
+                Ensure your manuscript meets all guidelines before submission to expedite the review process.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                <Link
+                  href="/submit-manuscript"
+                  className="px-10 py-4 bg-[#6B4A2E] text-white font-semibold rounded-full hover:bg-[#5A3D26] transition-colors shadow-lg text-lg"
+                >
+                  Submit Manuscript
+                </Link>
+                <Link
+                  href="/downloads/author-guidelines-template.docx"
+                  className="px-10 py-4 border-2 border-[#6B4A2E] text-[#6B4A2E] font-semibold rounded-full hover:bg-[#6B4A2E]/10 transition-colors text-lg"
+                >
+                  Download Template
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+
           
         </div>
       </div>

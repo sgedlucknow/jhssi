@@ -3,18 +3,16 @@ import Link from "next/link";
 export default function Footer() {
   const resources = [
     { href: "#", label: "Indexing" },
-    { href: "#", label: "Author Guidelines" },
-    { href: "#", label: "Publication Ethics" },
-    { href: "#", label: "Peer Review Process" },
-    { href: "#", label: "Open Access Policy" },
-  ];
+    { href: "/authors/author-guidelines", label: "Author Guidelines" },
+    { href: "/authors/publication-ethics", label: "Publication Ethics" },
+    { href: "/reviewers", label: "Peer Review Process" },
+    ];
 
   const quickLinks = [
     { href: "/about", label: "About Us" },
-    { href: "/editorial-board", label: "Editorial Board" },
     { href: "/archives", label: "Past Issues" },
     { href: "/contact", label: "Contact Us" },
-    { href: "/submit", label: "Submit Paper" },
+    { href: "/login", label: "Submit Paper" },
   ];
 
   return (
@@ -78,16 +76,9 @@ export default function Footer() {
             <div className="space-y-3">
               <p className="text-sm text-[#A8B8A0]">
                 <span className="block font-medium text-[#F4EFE7]">Editorial Office:</span>
-                editor@jhssi.org
+                <span>sgedlucknow@gmail.com</span>  
               </p>
-              <p className="text-sm text-[#A8B8A0]">
-                <span className="block font-medium text-[#F4EFE7]">ISSN:</span>
-                1234-5678 (Print)
-              </p>
-              <p className="text-sm text-[#A8B8A0]">
-                <span className="block font-medium text-[#F4EFE7]">eISSN:</span>
-                2345-6789 (Online)
-              </p>
+              
             </div>
           </div>
         </div>

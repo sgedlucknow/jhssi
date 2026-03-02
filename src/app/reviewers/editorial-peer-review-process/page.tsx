@@ -529,46 +529,7 @@ export default function EditorialPeerReviewPage() {
           </div>
 
           {/* Contact Information */}
-          <motion.div
-            className="bg-gradient-to-br from-[#3F2A1D] to-[#6B4A2E] rounded-xl p-12 text-white mb-24"
-            initial={{ opacity: 0, y: 30 }}
-            animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ delay: 2.6, duration: 0.6 }}
-          >
-            <h2 className="font-serif text-2xl mb-8 text-center">
-              Editorial Office Contact
-            </h2>
-            
-            <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-              <div className="text-center">
-                <div className="text-3xl mb-4">📧</div>
-                <h3 className="text-lg font-semibold mb-2">Email</h3>
-                <p className="text-white/90">editorial@jhssi.edu</p>
-                <p className="text-white/70 text-sm mt-1">For review process queries</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="text-3xl mb-4">📞</div>
-                <h3 className="text-lg font-semibold mb-2">Phone</h3>
-                <p className="text-white/90">+1 (555) 567-8901</p>
-                <p className="text-white/70 text-sm mt-1">Mon-Fri, 9AM-5PM EST</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="text-3xl mb-4">⏰</div>
-                <h3 className="text-lg font-semibold mb-2">Average Review Time</h3>
-                <p className="text-white/90">4-8 weeks</p>
-                <p className="text-white/70 text-sm mt-1">Initial decision timeline</p>
-              </div>
-            </div>
-            
-            <div className="mt-12 pt-8 border-t border-white/20">
-              <p className="text-white/80 text-sm text-center">
-                For ethical concerns or plagiarism reports, please contact ethics@jhssi.edu. All communications are treated with strict confidentiality.
-              </p>
-            </div>
-          </motion.div>
-
+          
           {/* Related Resources */}
           <motion.div 
             className="mb-24"

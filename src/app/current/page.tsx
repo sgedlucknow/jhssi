@@ -459,7 +459,7 @@ export default function CurrentIssuePage() {
                   <span>Download Full Issue (PDF)</span>
                 </Link>
                 <Link
-                  href="/archive"
+                  href="/archives"
                   className="px-10 py-4 border-2 border-[#6B4A2E] text-[#6B4A2E] font-semibold rounded-full hover:bg-[#6B4A2E]/10 transition-colors text-lg"
                 >
                   Browse Archive
@@ -493,7 +493,7 @@ export default function CurrentIssuePage() {
                   </div>
                 </Link>
                 
-                <Link href="/submit-manuscript" className="group">
+                <Link href="/login" className="group">
                   <div className="bg-[#F6F1E8] p-8 rounded-lg border border-[#E6DDCF] hover:border-[#C8A45D] transition-colors text-center h-full">
                     <div className="text-3xl mb-4">📝</div>
                     <h3 className="font-semibold text-lg text-[#3F2A1D] mb-3">
@@ -505,7 +505,7 @@ export default function CurrentIssuePage() {
                   </div>
                 </Link>
                 
-                <Link href="/editorial-board" className="group">
+                <Link href="/editorial" className="group">
                   <div className="bg-[#F6F1E8] p-8 rounded-lg border border-[#E6DDCF] hover:border-[#C8A45D] transition-colors text-center h-full">
                     <div className="text-3xl mb-4">👥</div>
                     <h3 className="font-semibold text-lg text-[#3F2A1D] mb-3">

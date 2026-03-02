@@ -179,7 +179,7 @@ export default function FinalChecklist() {
               
               <div className="flex flex-wrap justify-center gap-4">
                 <motion.a
-                  href="/submit"
+                  href="/login"
                   className="px-8 py-3 bg-white text-[#3F2A1D] font-medium rounded-full hover:bg-[#F6F1E8] transition-colors"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
