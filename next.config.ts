@@ -12,7 +12,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  assetPrefix: "https://jhssi.com",
+  //assetPrefix: "https://jhssi.com",
 
   images: {
     unoptimized: false,
