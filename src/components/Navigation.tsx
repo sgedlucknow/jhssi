@@ -235,6 +235,11 @@ export default function Navigation() {
 
   const navLinks = [
     { 
+      href: "/", 
+      label: "Home",
+      submenu: null
+    },
+    { 
       href: "/about", 
       label: "About",
       submenu: [
@@ -417,6 +422,7 @@ export default function Navigation() {
             >
               Login
             </Link>
+            
           </div>
 
           {/* Mobile Menu Button */}
