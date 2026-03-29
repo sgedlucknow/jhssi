@@ -1,0 +1,197 @@
+// This is your Prisma schema file
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// USER & AUTHENTICATION MODELS
+// ============================================
+
+enum UserRole {
+  STUDENT
+  AUTHOR
+  ADMIN
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String   @unique
+  password  String
+  role      UserRole @default(STUDENT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  submissions       Submission[] @relation("StudentSubmissions")
+  assignedSubmissions Submission[] @relation("AuthorAssignments")
+  reviews           Review[]
+
+  @@map("users")
+}
+
+// ============================================
+// SUBMISSION MANAGEMENT MODELS
+// ============================================
+
+enum SubmissionStatus {
+  PENDING
+  UNDER_REVIEW
+  REVISION_REQUESTED
+  ACCEPTED
+  REJECTED
+}
+
+model Submission {
+  id          String           @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  abstract    String
+  fileUrl     String
+  status      SubmissionStatus @default(PENDING)
+  
+  studentId   String           @db.ObjectId
+  student     User             @relation("StudentSubmissions", fields: [studentId], references: [id], onDelete: Cascade)
+  
+  assignedAuthorId String?      @db.ObjectId
+  assignedAuthor   User?        @relation("AuthorAssignments", fields: [assignedAuthorId], references: [id])
+  
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  // Relations
+  reviews     Review[]
+
+  @@index([studentId])
+  @@index([assignedAuthorId])
+  @@index([status])
+  @@map("submissions")
+}
+
+enum ReviewRecommendation {
+  ACCEPT
+  REJECT
+  REVISE
+}
+
+model Review {
+  id             String               @id @default(auto()) @map("_id") @db.ObjectId
+  comments       String
+  recommendation ReviewRecommendation
+  
+  submissionId   String               @db.ObjectId
+  submission     Submission           @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  
+  authorId       String               @db.ObjectId
+  author         User                 @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  
+  createdAt      DateTime             @default(now())
+
+  @@index([submissionId])
+  @@index([authorId])
+  @@map("reviews")
+}
+
+// ============================================
+// AD TRACKING MODELS (existing)
+// ============================================
+
+model Ad {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  imageUrl    String
+  targetUrl   String
+  placement   String
+  isActive    Boolean  @default(true)
+  startDate   DateTime @default(now())
+  endDate     DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  impressions AdImpression[]
+  clicks      AdClick[]
+  views       AdView[]
+
+  @@map("ads")
+}
+
+model AdImpression {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  adId      String   @db.ObjectId
+  sessionId String
+  userId    String?
+  userAgent String?
+  ipAddress String?
+  page      String
+  timestamp DateTime @default(now())
+
+  ad Ad @relation(fields: [adId], references: [id], onDelete: Cascade)
+
+  @@index([adId])
+  @@index([timestamp])
+  @@index([sessionId])
+  @@map("ad_impressions")
+}
+
+model AdView {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  adId         String   @db.ObjectId
+  sessionId    String
+  userId       String?
+  userAgent    String?
+  ipAddress    String?
+  page         String
+  viewDuration Int?
+  viewedAt     DateTime @default(now())
+
+  ad Ad @relation(fields: [adId], references: [id], onDelete: Cascade)
+
+  @@index([adId])
+  @@index([viewedAt])
+  @@index([sessionId])
+  @@map("ad_views")
+}
+
+model AdClick {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  adId      String   @db.ObjectId
+  sessionId String
+  userId    String?
+  userAgent String?
+  ipAddress String?
+  page      String
+  clickedAt DateTime @default(now())
+
+  ad Ad @relation(fields: [adId], references: [id], onDelete: Cascade)
+
+  @@index([adId])
+  @@index([clickedAt])
+  @@index([sessionId])
+  @@map("ad_clicks")
+}
+
+model AdDailyMetrics {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  adId            String   @db.ObjectId
+  date            DateTime
+  impressions     Int      @default(0)
+  views           Int      @default(0)
+  clicks          Int      @default(0)
+  uniqueVisitors  Int      @default(0)
+  ctr             Float    @default(0)
+  viewability     Float    @default(0)
+  avgViewDuration Float    @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([adId, date])
+  @@index([adId])
+  @@index([date])
+  @@map("ad_daily_metrics")
+}
